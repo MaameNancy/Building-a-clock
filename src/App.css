@@ -1,0 +1,28 @@
+body.default {
+  background-color: white;
+  color: black;
+}
+
+body.dark {
+  background-color: black;
+  color: white;
+}
+
+body.light {
+  background-color: lightgray;
+  color: black;
+}
+
+.clock-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.flip-clock {
+  font-size: 3rem;
+  margin: 20px;
+}
+
+.button-container {
+  margin: 20px;
+}

@@ -1,0 +1,49 @@
+/* themes.css */
+
+/* Default Theme */
+:root {
+  --background-color: #fff;
+  --text-color: #000;
+  --button-background: #007bff;
+  --button-text-color: #fff;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  --background-color: #333;
+  --text-color: #fff;
+  --button-background: #555;
+  --button-text-color: #fff;
+}
+
+/* Light Theme */
+body.light-theme {
+  --background-color: #f9f9f9;
+  --text-color: #333;
+  --button-background: #007bff;
+  --button-text-color: #fff;
+}
+
+/* Blue Theme */
+body.blue-theme {
+  --background-color: #e0f7fa;
+  --text-color: #007bff;
+  --button-background: #007bff;
+  --button-text-color: #fff;
+}
+
+/* Green Theme */
+body.green-theme {
+  --background-color: #e8f5e9;
+  --text-color: #388e3c;
+  --button-background: #388e3c;
+  --button-text-color: #fff;
+}
+
+/* Red Theme */
+body.red-theme {
+  --background-color: #ffebee;
+  --text-color: #d32f2f;
+  --button-background: #d32f2f;
+  --button-text-color: #fff;
+}
