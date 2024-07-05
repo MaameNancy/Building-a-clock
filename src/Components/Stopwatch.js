@@ -1,44 +1,72 @@
-// src/components/Stopwatch.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import "./StopWatch.css"; // Corrected import statement to match the file name
 
 const Stopwatch = () => {
+  const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(0);
-  const [running, setRunning] = useState(false);
+  const [laps, setLaps] = useState([]);
+  const intervalRef = useRef();
 
-  const handleStart = () => {
-    setRunning(true);
-  };
-
-  const handleStop = () => {
-    setRunning(false);
-  };
-
-  const handleReset = () => {
-    setRunning(false);
-    setTime(0);
-  };
-
-  useEffect(() => {
-    if (running) {
-      const interval = setInterval(() => {
-        setTime((prevTime) => prevTime + 1);
-      }, 1000);
-      return () => clearInterval(interval);
+  const startStopwatch = () => {
+    if (isRunning) {
+      clearInterval(intervalRef.current);
+    } else {
+      const startTime = Date.now() - time;
+      intervalRef.current = setInterval(() => {
+        setTime(Date.now() - startTime);
+      }, 10);
     }
-  }, [running]);
+    setIsRunning(!isRunning);
+  };
+
+  const resetStopwatch = () => {
+    clearInterval(intervalRef.current);
+    setTime(0);
+    setLaps([]);
+    setIsRunning(false);
+  };
+
+  const lapStopwatch = () => {
+    if (!isRunning) return;
+    const newLapTime = time;
+    setLaps([...laps, newLapTime]);
+  };
+
+  const formatTime = (time) => {
+    // Format time in hours, minutes, seconds, and milliseconds
+    const hours = Math.floor(time / (60 * 60 * 100));
+    const minutes = Math.floor((time / (60 * 100)) % 60);
+    const seconds = Math.floor((time / 100) % 60);
+    const milliseconds = Math.floor(time % 100);
+    return `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${milliseconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   return (
-    <div>
-      <div className="flip-clock">
-        {Math.floor(time / 60)}:{time % 60}
+    <div className="stopwatch">
+      <div className="display">{formatTime(time)}</div>
+      <div className="controls">
+        <button className="control-btn" onClick={startStopwatch}>
+          {isRunning ? "Stop" : "Start"}
+        </button>
+        <button className="control-btn" onClick={lapStopwatch}>
+          Lap
+        </button>
+        <button className="control-btn" onClick={resetStopwatch}>
+          Reset
+        </button>
       </div>
-      <button onClick={handleStart} disabled={running}>
-        Start
-      </button>
-      <button onClick={handleStop} disabled={!running}>
-        Stop
-      </button>
-      <button onClick={handleReset}>Reset</button>
+      <div className="laps">
+        <h4>Laps:</h4>
+        <ul>
+          {laps.map((lap, index) => (
+            <li key={index}>{formatTime(lap)}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

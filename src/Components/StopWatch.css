@@ -1,0 +1,49 @@
+.stopwatch {
+  text-align: center;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.display {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.control-btn {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.control-btn:hover {
+  background-color: #0056b3;
+}
+
+.laps {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.laps h4 {
+  font-size: 1.5rem;
+}
+
+.laps ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.laps ul li {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
