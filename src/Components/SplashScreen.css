@@ -1,20 +1,29 @@
-.splash-screen {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.splash-logo {
+  max-width: 100vw;
+  max-height: 100vh;
+  object-fit: contain;
 }
 
-.splash-logo-fullscreen {
-  width: 100vw;
-  height: 50vh;
-  object-fit: cover;
+/* Large screens */
+@media (min-width: 1200px) {
+  .splash-logo {
+    max-width: 155vw;
+    max-height: 155vh;
+  }
 }
 
-.welcome-message {
-  font-size: 48px;
-  font-weight: bold;
-  color: #fff; /* adjust the color to your liking */
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* add a text shadow for better readability */
+/* Medium screens */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .splash-logo {
+    max-width: 60vw;
+    max-height: 60vh;
+  }
+}
+
+/* Small screens */
+@media (max-width: 767px) {
+  .splash-logo {
+    max-width: 40vw;
+    max-height: 40vh;
+  }
 }
