@@ -1,115 +1,105 @@
-.alarm-container {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+/* CSS Reset or Normalization */
+@import "normalize.css";
+
+/* Variables */
+:root {
+  --font-size-base: 14px; /* reduced font size base */
+  --padding-base: 8px; /* reduced padding base */
+  --margin-base: 15px; /* reduced margin base */
+  --border-color: #ccc;
+  --background-color-dark: #333;
+  --text-color-dark: #fff;
 }
 
-.alarm-item {
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #eee;
-  border-radius: 4px;
+/* Alarm List */
+.alarm-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.alarm-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
+.alarm-list li {
+  margin-bottom: var(--margin-base);
 }
 
-.save-button,
-.cancel-button,
-.delete-button {
-  background-color: #007bff;
-  color: white;
+.alarm-input {
+  width: 70%; /* reduced width */
+  padding: 3px; /* reduced padding */
+  font-size: 14px; /* reduced font size */
+  height: 20px; /* reduced height */
+  border: 1px solid var(--border-color);
+  word-spacing: 2px; /* added word spacing */
+}
+
+/* Alarm Notification */
+.alarm-notification {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: var(--padding-base);
+  border: 2px solid #f00;
+  z-index: 1000;
+  text-align: center;
+  white-space: pre-wrap; /* added white space wrapping */
+}
+
+.alarm-notification h2 {
+  color: #f00;
+}
+
+/* Settings */
+.settings {
+  margin-top: var(--margin-base);
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+.dark-mode.alarm-input {
+  background-color: #444;
+  color: var(--text-color-dark);
+  border: 1px solid #666;
+  font-size: 12px; /* reduced font size in dark mode */
+}
+
+.dark-mode.alarm-notification {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 2px solid var(--text-color-dark);
+}
+
+/* Button styles */
+.button {
+  padding: var(--padding-base);
+  font-size: var(--font-size-base);
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 16px; /* Adjust font size */
-}
-
-.save-button:hover,
-.cancel-button:hover,
-.delete-button:hover {
-  background-color: #0056b3;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-p {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="time"] {
-  padding: 8px;
-  margin-right: 10px;
-  font-size: 16px; /* Adjust input font size */
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropbtn {
+  border-radius: 5px;
   background-color: #4caf50;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
+  color: #fff;
+  cursor: pointer;
 }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-.dropdown:hover .dropbtn {
+.button:hover {
   background-color: #3e8e41;
 }
 
-.edit-button {
-  background-color: #ffc107;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.edit-button:hover {
-  background-color: #ff9800;
+.edit-button {
+  background-color: #337ab7;
+}
+
+.delete-button {
+  background-color: #d9534f;
+}
+
+.snooze-button {
+  background-color: #5bc0de;
 }

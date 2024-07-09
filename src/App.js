@@ -1,109 +1,124 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
+import "./Theme.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClock,
+  faHourglassHalf,
+  faBell,
+  faGlobe,
+  faStopwatch,
+  faPalette,
+} from "@fortawesome/free-solid-svg-icons";
 import Clock from "./Components/Clock";
 import Timer from "./Components/Timer";
 import Alarm from "./Components/Alarm";
 import WorldClock from "./Components/WorldClock";
-import Stopwatch from "./Components/Stopwatch";
+import Stopwatch from "./Components/StopWatch";
 import ThemeSelector from "./Components/ThemeSelector";
-import "./App.css";
-import "./Dropdown.css";
-import "./Theme.css"; // Import the themes CSS
+import SplashScreen from "./Components/SplashScreen";
+
+const IconBarButton = ({ icon, label, onClick }) => (
+  <button onClick={onClick} className="icon-bar-button">
+    <FontAwesomeIcon icon={icon} />
+    {label}
+  </button>
+);
 
 const App = () => {
-  const [view, setView] = useState("clock");
-  const [theme, setTheme] = useState("default");
+  const [view, setView] = useState("splash");
+  const [theme, setTheme] = useState("light");
+  const [customImage, setCustomImage] = useState(null);
 
   useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+    const timer = setTimeout(() => {
+      setView("clock");
+    }, 3000); // Splash screen duration: 3 seconds
 
-  const renderView = () => {
-    switch (view) {
-      case "clock":
-        return <Clock />;
-      case "timer":
-        return <Timer />;
-      case "alarm":
-        return <Alarm />;
-      case "worldClock":
-        return <WorldClock />;
-      case "stopwatch":
-        return <Stopwatch />;
-      case "themeSelector":
-        return <ThemeSelector setTheme={setTheme} />;
-      default:
-        return <Clock />;
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleThemeChange = ({ theme, image }) => {
+    setTheme(theme);
+    if (image) {
+      setCustomImage(image);
+    } else {
+      setCustomImage(null);
     }
   };
 
-  return (
-    <div className="App">
-      <Dropdown setView={setView} />
-      {renderView()}
-    </div>
-  );
-};
+  useEffect(() => {
+    if (theme === "custom" && customImage) {
+      document.body.style.backgroundImage = `url(${customImage})`;
+      document.body.style.backgroundSize = "cover";
+    } else {
+      document.body.style.backgroundImage = "none";
+      document.body.style.backgroundColor =
+        theme === "dark" ? "#333333" : "#ffffff";
+    }
+  }, [theme, customImage]);
 
-const Dropdown = ({ setView }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const getIconBarButtons = () => {
+    return [
+      {
+        icon: faClock,
+        label: "Clock",
+        onClick: () => setView("clock"),
+      },
+      {
+        icon: faHourglassHalf,
+        label: "Timer",
+        onClick: () => setView("timer"),
+      },
+      {
+        icon: faBell,
+        label: "Alarm",
+        onClick: () => setView("alarm"),
+      },
+      {
+        icon: faGlobe,
+        label: "World Clock",
+        onClick: () => setView("worldClock"),
+      },
+      {
+        icon: faStopwatch,
+        label: "Stopwatch",
+        onClick: () => setView("stopwatch"),
+      },
+      {
+        icon: faPalette,
+        label: "Themes",
+        onClick: () => setView("themeSelector"),
+      },
+    ];
   };
 
   return (
-    <div className="dropdown">
-      <button
-        className="dropdown-toggle"
-        onClick={toggleDropdown}
-        aria-expanded={isOpen}
-      >
-        Menu
-      </button>
-      <ul
-        className={`dropdown-menu ${isOpen ? "show" : ""}`}
-        aria-labelledby="dropdownMenuButton"
-      >
-        <li>
-          <button className="dropdown-item" onClick={() => setView("clock")}>
-            Clock
-          </button>
-        </li>
-        <li>
-          <button className="dropdown-item" onClick={() => setView("timer")}>
-            Timer
-          </button>
-        </li>
-        <li>
-          <button className="dropdown-item" onClick={() => setView("alarm")}>
-            Alarm
-          </button>
-        </li>
-        <li>
-          <button
-            className="dropdown-item"
-            onClick={() => setView("worldClock")}
-          >
-            World Clock
-          </button>
-        </li>
-        <li>
-          <button
-            className="dropdown-item"
-            onClick={() => setView("stopwatch")}
-          >
-            Stopwatch
-          </button>
-        </li>
-        <li>
-          <button
-            className="dropdown-item"
-            onClick={() => setView("themeSelector")}
-          >
-            Theme Selector
-          </button>
-        </li>
-      </ul>
+    <div className={`App ${theme}`}>
+      {view === "splash" ? (
+        <SplashScreen onSplashEnd={() => setView("clock")} />
+      ) : (
+        <>
+          <header className="App-header">
+            <h1>Clock</h1>
+          </header>
+          <div className="App-content">
+            {view === "clock" && <Clock />}
+            {view === "timer" && <Timer />}
+            {view === "alarm" && <Alarm />}
+            {view === "worldClock" && <WorldClock />}
+            {view === "stopwatch" && <Stopwatch />}
+            {view === "themeSelector" && (
+              <ThemeSelector onChangeTheme={handleThemeChange} />
+            )}
+          </div>
+          <div className="icon-bar">
+            {getIconBarButtons().map((button, index) => (
+              <IconBarButton key={index} {...button} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

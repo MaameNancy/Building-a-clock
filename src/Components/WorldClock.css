@@ -1,36 +1,60 @@
 .world-clock {
+  padding: 20px;
+}
+
+.timezone-dropdown {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.timezone-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.timezone-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.timezone-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: var(--text-color);
 }
 
-.search-bar {
-  margin-bottom: 10px;
-  padding: 5px;
-  font-size: 16px;
-  width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+.timezone-name {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.country-select {
-  margin-bottom: 10px;
-  width: 200px;
-}
-
-.country-time {
-  margin: 10px;
-  text-align: center;
-}
-
-.country-time h3 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-.country-time p {
-  font-size: 2rem;
+.timezone-time {
+  font-size: 24px;
   margin: 5px 0;
+}
+
+.timezone-offset {
+  font-size: 14px;
+}
+
+.timezone-day-night {
+  font-size: 24px;
+}
+
+.day {
+  color: yellow;
+}
+
+.night {
+  color: blue;
+}
+
+button {
+  margin-top: 5px;
 }

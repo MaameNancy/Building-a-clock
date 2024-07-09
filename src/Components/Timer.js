@@ -1,14 +1,22 @@
-// src/components/Timer.js
 import React, { useState, useEffect } from "react";
+import "./Timer.css";
 
-const Timer = () => {
-  const [timeLeft, setTimeLeft] = useState(0);
+function Timer() {
+  const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
 
-  const handleStart = () => {
-    if (!running && timeLeft > 0) {
-      setRunning(true);
+  useEffect(() => {
+    let intervalId;
+    if (running) {
+      intervalId = setInterval(() => {
+        setTime(time + 1);
+      }, 1000);
     }
+    return () => clearInterval(intervalId);
+  }, [running, time]);
+
+  const handleStart = () => {
+    setRunning(true);
   };
 
   const handleStop = () => {
@@ -17,40 +25,34 @@ const Timer = () => {
 
   const handleReset = () => {
     setRunning(false);
-    setTimeLeft(0);
+    setTime(0);
   };
 
-  useEffect(() => {
-    if (running && timeLeft > 0) {
-      const interval = setInterval(() => {
-        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    } else if (timeLeft === 0) {
-      setRunning(false);
-    }
-  }, [running, timeLeft]);
-
   return (
-    <div>
-      <input
-        type="number"
-        value={timeLeft}
-        onChange={(e) => setTimeLeft(Number(e.target.value))}
-        disabled={running}
-      />
-      <button onClick={handleStart} disabled={running}>
-        Start
-      </button>
-      <button onClick={handleStop} disabled={!running}>
-        Stop
-      </button>
-      <button onClick={handleReset}>Reset</button>
-      <div className="flip-clock">
-        {Math.floor(timeLeft / 60)}:{timeLeft % 60}
+    <div className="timer">
+      <h1 className="timer-display">{formatTime(time)}</h1>
+      <div className="button-group">
+        <button className="button" onClick={handleStart}>
+          Start
+        </button>
+        <button className="button" onClick={handleStop}>
+          Stop
+        </button>
+        <button className="button" onClick={handleReset}>
+          Reset
+        </button>
       </div>
     </div>
   );
-};
+}
+
+function formatTime(time) {
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
+  const seconds = time % 60;
+  return `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
 
 export default Timer;

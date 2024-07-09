@@ -1,74 +1,86 @@
-import React, { useState, useRef } from "react";
-import "./StopWatch.css"; // Corrected import statement to match the file name
+import React, { useState, useEffect, useRef } from "react";
+import "./StopWatch.css";
 
 const Stopwatch = () => {
-  const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(0);
-  const [laps, setLaps] = useState([]);
-  const intervalRef = useRef();
+  const [isRunning, setIsRunning] = useState(false);
+  const [laps, setLaps] = useState(() => {
+    const savedLaps = localStorage.getItem("laps");
+    return savedLaps ? JSON.parse(savedLaps) : [];
+  });
+  const intervalRef = useRef(null);
 
-  const startStopwatch = () => {
-    if (isRunning) {
-      clearInterval(intervalRef.current);
-    } else {
-      const startTime = Date.now() - time;
+  useEffect(() => {
+    if (isRunning && !intervalRef.current) {
       intervalRef.current = setInterval(() => {
-        setTime(Date.now() - startTime);
-      }, 10);
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
     }
-    setIsRunning(!isRunning);
+    return () => {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    };
+  }, [isRunning]);
+
+  useEffect(() => {
+    localStorage.setItem("laps", JSON.stringify(laps));
+  }, [laps]);
+
+  const handleStart = () => {
+    setIsRunning(true);
   };
 
-  const resetStopwatch = () => {
-    clearInterval(intervalRef.current);
-    setTime(0);
-    setLaps([]);
+  const handleStop = () => {
     setIsRunning(false);
   };
 
-  const lapStopwatch = () => {
-    if (!isRunning) return;
-    const newLapTime = time;
-    setLaps([...laps, newLapTime]);
+  const handleLap = () => {
+    setLaps([...laps, time]);
   };
 
-  const formatTime = (time) => {
-    // Format time in hours, minutes, seconds, and milliseconds
-    const hours = Math.floor(time / (60 * 60 * 100));
-    const minutes = Math.floor((time / (60 * 100)) % 60);
-    const seconds = Math.floor((time / 100) % 60);
-    const milliseconds = Math.floor(time % 100);
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${milliseconds
-      .toString()
-      .padStart(2, "0")}`;
+  const handleReset = () => {
+    setIsRunning(false);
+    setTime(0);
+    setLaps([]);
+    localStorage.removeItem("laps");
   };
 
   return (
     <div className="stopwatch">
-      <div className="display">{formatTime(time)}</div>
-      <div className="controls">
-        <button className="control-btn" onClick={startStopwatch}>
-          {isRunning ? "Stop" : "Start"}
+      <h2>Stopwatch</h2>
+      <div className="time-display">
+        <span>{formatTime(time)}</span>
+      </div>
+      <div>
+        <button className="button" onClick={handleStart}>
+          Start
         </button>
-        <button className="control-btn" onClick={lapStopwatch}>
+        <button className="button" onClick={handleStop}>
+          Stop
+        </button>
+        <button className="button" onClick={handleLap}>
           Lap
         </button>
-        <button className="control-btn" onClick={resetStopwatch}>
+        <button className="button" onClick={handleReset}>
           Reset
         </button>
       </div>
-      <div className="laps">
-        <h4>Laps:</h4>
-        <ul>
-          {laps.map((lap, index) => (
-            <li key={index}>{formatTime(lap)}</li>
-          ))}
-        </ul>
-      </div>
+      <ul className="lap-list">
+        {laps.map((lap, index) => (
+          <li key={index}>{formatTime(lap)}</li>
+        ))}
+      </ul>
     </div>
   );
+};
+
+const formatTime = (time) => {
+  const hours = Math.floor(time / 3600);
+  const minutes = Math.floor((time % 3600) / 60);
+  const seconds = time % 60;
+  return `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 };
 
 export default Stopwatch;
