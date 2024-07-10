@@ -6,12 +6,12 @@ UltraModern Clock is a feature-rich clock application built using React. It incl
 
 ## Features
 
-- **Standard Clock**: Displays the current time with flipping pages animation.
-- **Countdown Timer**: Set a countdown timer with custom durations.
+- **Standard Clock**: Displays the current time,
+- **Countdown Timer**: Set a countdown.
 - **Alarm**: Set multiple alarms with a snooze option.
 - **World Clock**: View the time in different time zones.
 - **Stopwatch**: A simple stopwatch with start, stop, and reset functions.
-- **Theme Selector**: Choose from multiple themes to change the appearance of the clock.
+- **Theme Selector**: Choose from themes to change the appearance of the clock.
 - **Date Display**: Shows the current date along with the time.
 - **AM/PM Indicator**: Differentiates between day and night.
 
