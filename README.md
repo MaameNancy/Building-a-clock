@@ -1,8 +1,8 @@
-# UltraModern Clock
+#  Clock
 
 ## Overview
 
-UltraModern Clock is a feature-rich clock application built using React. It includes a variety of functionalities such as a standard clock, countdown timer, alarm, snooze button, world clock, stopwatch, and theme selection. The clock features a modern design with flipping pages animation for time changes.
+ Clock is a feature-rich clock application built using React. It includes a variety of functionalities such as a standard clock, countdown timer, alarm, snooze button, world clock, stopwatch, and theme selection. The clock features a modern design with flipping pages animation for time changes.
 
 ## Features
 
