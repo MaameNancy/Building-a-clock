@@ -1,14 +1,25 @@
+/* src/components/WorldClock.css */
 .world-clock {
+  text-align: center;
   padding: 20px;
+}
+
+.timezone-search {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
 }
 
 .timezone-dropdown {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  border: 1px solid #ccc;
   max-height: 200px;
   overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .timezone-dropdown li {
@@ -20,41 +31,44 @@
   background-color: #f0f0f0;
 }
 
+.selected-timezones {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+}
+
 .timezone-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #fafafa;
 }
 
-.timezone-name {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.timezone-time {
-  font-size: 24px;
-  margin: 5px 0;
-}
-
-.timezone-offset {
-  font-size: 14px;
-}
-
+.timezone-name,
+.timezone-time,
+.timezone-offset,
 .timezone-day-night {
-  font-size: 24px;
+  margin: 0 5px;
 }
 
-.day {
-  color: yellow;
-}
-
-.night {
-  color: blue;
+.blue-button {
+  background-color: blue;
+  color: white;
 }
 
 button {
-  margin-top: 5px;
+  background-color: #ff4b4b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: #ff1f1f;
 }
