@@ -45,7 +45,7 @@ To run the UltraModern Clock locally, follow these steps:
 
 ### Clock
 
-- The default view displays the current time with a flipping animation for seconds, minutes, and hours.
+- The default view displays the current time with seconds, minutes, and hours.
 - The current date is shown at the top.
 
 ### Timer
