@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/MaameNancy/Building-a-clock.git/static/css/main.773e898e.css",
+    "main.js": "/MaameNancy/Building-a-clock.git/static/js/main.57be8098.js",
+    "static/media/Clock image.jpg": "/MaameNancy/Building-a-clock.git/static/media/Clock image.6cc99de82955131c5b07.jpg",
+    "index.html": "/MaameNancy/Building-a-clock.git/index.html",
+    "main.773e898e.css.map": "/MaameNancy/Building-a-clock.git/static/css/main.773e898e.css.map",
+    "main.57be8098.js.map": "/MaameNancy/Building-a-clock.git/static/js/main.57be8098.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.773e898e.css",
+    "static/js/main.57be8098.js"
+  ]
+}
